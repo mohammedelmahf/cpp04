@@ -119,8 +119,8 @@ Brain::Brain()
 
 Brain::Brain(Brain const &input)
 {
-    *this = input;
     std::cout << "Brain Copy constructor called" << std::endl;
+    *this = input;
 }
 
 Brain & Brain::operator=(Brain const &input)

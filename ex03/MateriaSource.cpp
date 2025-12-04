@@ -33,14 +33,25 @@ MateriaSource::MateriaSource(MateriaSource const &copy): IMateriaSource(copy), _
 	for (int i = 0; i < 4; i++)
 	{
 		if (copy._learnInventory[i])
-			this->_learnInventory[i] = copy._learnInventory[i];
+			this->_learnInventory[i] = copy._learnInventory[i]->clone();
 	}
 	std::cout << "MateriaSource copied" << std::endl;
 }
 
 MateriaSource const	&MateriaSource::operator=(const MateriaSource &copy)
 {
-	(void)copy;
+	if (this != &copy)
+	{
+		for (int i = 0; i < 4; i++)
+		{
+			if (this->_learnInventory[i])
+				delete this->_learnInventory[i];
+			if (copy._learnInventory[i])
+				this->_learnInventory[i] = copy._learnInventory[i]->clone();
+			else
+				this->_learnInventory[i] = NULL;
+		}
+	}
 	return (*this);
 }
 

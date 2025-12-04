@@ -18,27 +18,28 @@ Cat::Cat() : Animal("Cat")
     this->_own_brain = new Brain();
 }
 
-Cat::Cat(std::string type) : Animal(type)
-{
-    std::cout << "Cat Parameterized constructor called" << std::endl;
-}
-
-Cat::Cat(Cat const &input) : Animal(input)
+Cat::Cat(const Cat &other) : Animal(other)
 {
     std::cout << "Cat Copy constructor called" << std::endl;
+    this->_own_brain = new Brain(*other._own_brain);
 }
 
-Cat & Cat::operator=(Cat const &input)
+Cat &Cat::operator=(const Cat &other)
 {
     std::cout << "Cat Copy assignment operator called" << std::endl;
-    if (this != &input)
-        this->_type = input._type;
-    return *this;
+    if (this != &other)
+    {
+        Animal::operator=(other);
+        delete this->_own_brain;
+        this->_own_brain = new Brain(*other._own_brain);
+    }
+    return (*this);
 }
 
 Cat::~Cat()
 {
     std::cout << "Cat Destructor called" << std::endl;
+    delete this->_own_brain;
 }
 
 void Cat::makeSound() const

@@ -40,14 +40,26 @@ Character::Character(Character const &copy): ICharacter(copy), _inventory()
 	for (int i = 0; i < 4; i++)
 	{
 		if (copy._inventory[i])
-			this->_inventory[i] = copy._inventory[i];
+			this->_inventory[i] = copy._inventory[i]->clone();
 	}
 	std::cout << "Character copied" << std::endl;
 }
 
 Character const	&Character::operator=(const Character &copy)
 {
-	this->_name = copy._name;
+	if (this != &copy)
+	{
+		this->_name = copy._name;
+		for (int i = 0; i < 4; i++)
+		{
+			if (this->_inventory[i])
+				delete this->_inventory[i];
+			if (copy._inventory[i])
+				this->_inventory[i] = copy._inventory[i]->clone();
+			else
+				this->_inventory[i] = NULL;
+		}
+	}
 	return (*this);
 }
 
