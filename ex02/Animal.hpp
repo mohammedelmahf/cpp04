@@ -6,7 +6,7 @@
 /*   By: maelmahf <maelmahf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 17:54:13 by maelmahf          #+#    #+#             */
-/*   Updated: 2025/12/02 10:32:37 by maelmahf         ###   ########.fr       */
+/*   Updated: 2025/12/02 14:11:57 by maelmahf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,6 @@ class Animal
         Animal & operator=(Animal const &inpput);
         virtual ~Animal();
 
-        virtual void makeSound() const;
+        virtual void makeSound() const = 0 ;
         std::string getType() const;
 };
